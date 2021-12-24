@@ -1,5 +1,5 @@
-import sys
-sys.path.insert(0, './intel-qs/build/lib/')
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "intel-qs/build/lib/"))
 import intelqs_py as sim
 
 import numpy as np
@@ -74,7 +74,7 @@ class AmplitudeFlow(QubitDevice):
             elif op.name == "T":
                 self.drawer.draw_layer(*self.drawer.draw_t(op.wires[0]))
             elif op.name == "PhaseShift":
-                self.drawer.draw_layer(*self.drawer.draw_p(op.wires[0]))
+                self.drawer.draw_layer(*self.drawer.draw_p(op.wires[0], op.parameters[0]))
             elif op.name == "RY":
                 self.drawer.draw_layer(*self.drawer.draw_ry(op.wires[0], op.parameters[0]))
             elif op.name == "RZ":
